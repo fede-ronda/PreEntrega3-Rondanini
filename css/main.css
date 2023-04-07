@@ -35,12 +35,14 @@ a {
     display: grid;
     grid-template-columns: 1fr 4fr;
     background-color: rgb(29, 29, 29);
+    padding-top: 1rem;
 }
 
 .contenedor-productos{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
+    justify-items: center;
 
 }
 
@@ -48,9 +50,8 @@ a {
 .contenedor-menu {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 5rem;
-    padding: 2rem;
-    padding-right: 0;
     height: 100vh;
 }
 
@@ -62,9 +63,10 @@ a {
 .menu {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
-    align-items: flex-start;
 }
+
 
 .boton-menu {
     background-color: white;
@@ -99,10 +101,9 @@ a {
 
 main {
     background-color: white;
-    margin: 1rem;
-    margin-left: 0;
     border-radius: 1rem;
     padding: 3rem;
+    margin-right: 3rem;
 }
 
 .titulo-principal {
@@ -112,6 +113,7 @@ main {
     margin-bottom: 2rem;
 }
 
+
 .tarjeta {
     width: 200px;
     height: 320px;
@@ -120,8 +122,15 @@ main {
     align-items: center;
     overflow: hidden;
     border-radius: 5px;
-    background-color: black;
-    color: white;
+    background-color: rgb(245, 245, 245);
+    color: black;
+    -webkit-box-shadow: 0px 9px 9px -7px #000000; 
+    box-shadow: 0px 9px 9px -7px #000000;
+}
+
+.tarjeta:hover {
+    -webkit-box-shadow: 0px 9px 9px -7px violet; 
+    box-shadow: 0px 9px 9px -7px violet;
 }
 
 .tarjeta-img {
@@ -156,6 +165,10 @@ main {
     margin-top: 0.5rem;
 }
 
+.boton-agregar:hover{
+    background-color: violet;
+}
+
 /* CARRITO */
 
 .carrito {
@@ -176,11 +189,11 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: black;
+    background-color: rgb(245, 245, 245);
     padding: 0.5rem;
     padding-right: 2rem;
     border-radius: 0.5rem;
-    color: white;
+    color: black;
 }
 
 .carrito-tarjeta-img{
@@ -195,7 +208,7 @@ main {
 .carrito-tarjeta-eliminar{
     border: 0;
     background-color: transparent;
-    color: red;
+    color: rgb(255, 45, 45);
     cursor: pointer;
 }
 
@@ -206,8 +219,8 @@ main {
 
 .carrito-acciones-vaciar{
     border: 0;
-    background-color: black;
-    color: white;
+    background-color: rgb(245, 245, 245);
+    color: black;
     padding: 1rem;
     border-radius: 0.5rem;
     text-transform: uppercase;
@@ -215,7 +228,7 @@ main {
 }
 
 .carrito-acciones-vaciar:hover{
-    background-color: red;
+    background-color: rgb(255, 45, 45);
 }
 
 
@@ -239,8 +252,8 @@ main {
 
 .carrito-acciones-comprar{
     border: 0;
-    background-color: violet;
-    color: white;
+    background-color: rgb(245, 245, 245);
+    color: black;
     padding: 0.5rem;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
@@ -249,7 +262,7 @@ main {
 }
 
 .carrito-acciones-comprar:hover{
-    background-color: green;
+    background-color: violet;
 }
 
 .disabled{
