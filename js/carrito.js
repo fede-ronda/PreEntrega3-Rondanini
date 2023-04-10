@@ -78,8 +78,25 @@ function ActualizarBotonesEliminar() {
 }
 
 function EliminarDelCarrito(e) {
+
     const IdBoton = e.currentTarget.id;
     const index = ProductosEnCarrito.findIndex(producto => producto.id === IdBoton);
+    
+    Toastify({
+        text: "Producto eliminado",
+        duration: 1800,
+        close: false,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+            background: "violet",
+            color: "black",
+        },
+        onClick: function () { } // Callback after click
+    }).showToast();
+
+
     ProductosEnCarrito.splice(index, 1);
     CargarProductosCarrito();
 
@@ -91,9 +108,24 @@ function EliminarDelCarrito(e) {
 BotonVaciar.addEventListener("click", VaciarCarrito);
 
 function VaciarCarrito() {
-    ProductosEnCarrito.length = 0;
-    localStorage.setItem("productos-en-carrito", JSON.stringify(ProductosEnCarrito));
-    CargarProductosCarrito();
+
+    Swal.fire({
+        title: '¿Estás Seguro?',
+        icon: 'warning',
+        html:`Se van a borrar ${ProductosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)} productos.`,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Si',
+        cancelButtonText:'No',
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            ProductosEnCarrito.length = 0;
+            localStorage.setItem("productos-en-carrito", JSON.stringify(ProductosEnCarrito));
+            CargarProductosCarrito();
+        }
+    })
+
 }
 
 function ActualizarTotal() {
@@ -104,13 +136,20 @@ function ActualizarTotal() {
 BotonComprar.addEventListener("click", ComprarCarrito);
 
 function ComprarCarrito() {
+
+    Swal.fire(
+        '¡Gracias por tu compra!',
+        'Espero que lo disfrutes',
+        'success'
+        )
+
     ProductosEnCarrito.length = 0;
     localStorage.setItem("productos-en-carrito", JSON.stringify(ProductosEnCarrito));
 
-    ContenedorCarritoVacio.classList.add("disabled");
+    ContenedorCarritoVacio.classList.remove("disabled");
     ContenedorCarritoProductos.classList.add("disabled");
     ContenedorCarritoAcciones.classList.add("disabled");
-    ContenedorCarritoComprado.classList.remove("disabled");
+    ContenedorCarritoComprado.classList.add("disabled");
 
 }
 

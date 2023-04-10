@@ -1,11 +1,11 @@
 let Productos = [];
 
 fetch("./js/productos.json")
-.then(response => response.json())
-.then(data => {
-    Productos = data;
-    CargarProductos(Productos);
-})
+    .then(response => response.json())
+    .then(data => {
+        Productos = data;
+        CargarProductos(Productos);
+    })
 
 
 const ContenedorProductos = document.querySelector("#contenedor-productos");
@@ -55,7 +55,7 @@ BotonesCategorias.forEach(boton => {
         if (e.currentTarget.id != "todos") {
             const ProductoCategoria = Productos.find(producto => producto.categoria.id === e.currentTarget.id);
             TituloPrincipal.innerText = ProductoCategoria.categoria.nombre;
-            
+
             const ProductosBoton = Productos.filter(producto => producto.categoria.id === e.currentTarget.id);
             CargarProductos(ProductosBoton);
         } else {
@@ -79,7 +79,7 @@ let ProductosEnCarrito;
 let ProductosEnCarritoLS = localStorage.getItem("productos-en-carrito");
 
 
-if(ProductosEnCarritoLS) {
+if (ProductosEnCarritoLS) {
     ProductosEnCarrito = JSON.parse(ProductosEnCarritoLS);
     ActualizarNumerito();
 } else {
@@ -94,7 +94,21 @@ function AgregarAlCarrito(e) {
     const IdBoton = e.currentTarget.id;
     const ProductoAgregado = Productos.find(producto => producto.id === IdBoton);
 
-    if(ProductosEnCarrito.some(producto => producto.id === IdBoton)) {
+    Toastify({
+        text: "Agregado",
+        duration: 1800,
+        close: false,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+            background: "violet",
+            color: "black",
+        },
+        onClick: function () { } // Callback after click
+    }).showToast();
+
+    if (ProductosEnCarrito.some(producto => producto.id === IdBoton)) {
         const index = ProductosEnCarrito.findIndex(producto => producto.id === IdBoton);
         ProductosEnCarrito[index].cantidad++;
 
